@@ -15,6 +15,7 @@ do
     LoadBalancer=''
     ((BackendNum++))
     LBConfig="$LBConfig\nbackend backend-$BackendNum"
+    LBConfig="$LBConfig\n  balance source"
     for LbIP in $KubeIPs
     do
         ((ServerNum++))
