@@ -11,8 +11,10 @@ for Port in "${ExposePort[@]}"
 do
     LBConfig="$LBConfig\nfrontend front-$Port"
     LBConfig="$LBConfig\n  bind *:$Port"
-    LBConfig="$LBConfig\n default_backend backend-$Port"
+    LBConfig="$LBConfig\n  default_backend backend-$Port"
 done
+
+LBConfig="$LBConfig\n"
 
 for Port in "${ExposePort[@]}"
 do
