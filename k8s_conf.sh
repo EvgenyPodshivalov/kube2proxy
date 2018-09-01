@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ExposePort=(30355 80 8203)
+ExposePort=(30355 30855 30784)
 
 KubeIPs=$(kubectl get nodes -o wide | awk 'match($3,/(.*)worker(.*)/){print $6}')
 
@@ -24,7 +24,7 @@ do
     for LbIP in $KubeIPs
     do
         ((ServerNum++))
-        LbString="  server LB$ServerNum $LbIP:$Port check"
+        LbString="  server Serv$Port-LB$ServerNum $LbIP:$Port check"
         LoadBalancer="$LbString\n$LoadBalancer"
     done
     LBConfig="$LBConfig\n$LoadBalancer"
