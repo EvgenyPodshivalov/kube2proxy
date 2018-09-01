@@ -2,7 +2,7 @@
 
 LabelKey=app
 LabelSvc=kibana
-ExposePort=(30355 8022 999)
+ExposePort=(8201 8202 8203)
 LocalPort=8200
 
 KubeIPs=$(kubectl get nodes -o wide | awk 'match($3,/(.*)worker(.*)/){print $6}')
