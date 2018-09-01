@@ -14,7 +14,7 @@ do
     LBConfig="$LBConfig\n  default_backend backend-$Port"
 done
 
-LBConfig="$LBConfig\n"
+LBConfig="$LBConfig\r\n"
 
 for Port in "${ExposePort[@]}"
 do
