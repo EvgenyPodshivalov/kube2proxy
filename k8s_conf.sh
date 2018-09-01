@@ -7,14 +7,14 @@ LocalPort=8200
 
 KubeIPs=$(kubectl get nodes -o wide | awk 'match($3,/(.*)worker(.*)/){print $6}')
 
+LBConfig="$LBConfig\nfrontend default-front"
+
 for Port in "${ExposePort[@]}"
 do
-    LBConfig="$LBConfig\nfrontend front-$Port"
     LBConfig="$LBConfig\n  bind *:$Port"
-    LBConfig="$LBConfig\n  default_backend backend-$Port"
+    LBConfig="$LBConfig\n  acl DestPort-$Port dst_port $Port"
+    LBConfig="$LBConfig\n  use_backend backend-$Port if DestPort-$Port"
 done
-
-LBConfig="$LBConfig\r\n"
 
 for Port in "${ExposePort[@]}"
 do
