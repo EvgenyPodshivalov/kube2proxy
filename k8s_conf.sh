@@ -1,7 +1,7 @@
 #!/bin/bash
 
-Key=app
-Svc=kibana
+LabelKey=app
+LabelSvc=kibana
 ExposePort=30355
 LocalPort=8200
 
