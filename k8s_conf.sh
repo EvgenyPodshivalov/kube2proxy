@@ -7,14 +7,18 @@ LocalPort=8200
 
 KubeIPs=$(kubectl get nodes -o wide | awk 'match($3,/(.*)worker(.*)/){print $6}')
 
-BackendNum=0
+for Port in "${ExposePort[@]}"
+do
+    LBConfig="$LBConfig\nfrontend front-$Port"
+    LBConfig="$LBConfig\n  bind *:$Port"
+    LBConfig="$LBConfig\n default_backend backend-$Port"
+done
 
 for Port in "${ExposePort[@]}"
 do
     ServerNum=0
     LoadBalancer=''
-    ((BackendNum++))
-    LBConfig="$LBConfig\nbackend backend-$BackendNum"
+    LBConfig="$LBConfig\nbackend backend-$Port"
     LBConfig="$LBConfig\n  balance source"
     for LbIP in $KubeIPs
     do
