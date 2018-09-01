@@ -7,10 +7,13 @@ LocalPort=8200
 
 KubeIPs=$(kubectl get nodes -o wide | awk 'match($3,/(.*)worker(.*)/){print $6}')
 
-ServerNum=0
+BackendNum=0
 
 for Port in "${ExposePort[@]}"
 do
+    ServerNum=0
+    ((BackendNum++))
+    LoadBalancer="$LoadBalancer\nbackend backend-$BackendNum"
     for LbIP in $KubeIPs
     do
         ((ServerNum++))
