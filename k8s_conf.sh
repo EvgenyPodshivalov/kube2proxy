@@ -12,6 +12,7 @@ BackendNum=0
 for Port in "${ExposePort[@]}"
 do
     ServerNum=0
+    LoadBalancer=''
     ((BackendNum++))
     LBConfig="$LBConfig\nbackend backend-$BackendNum"
     for LbIP in $KubeIPs
