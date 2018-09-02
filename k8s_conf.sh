@@ -1,12 +1,12 @@
 #!/bin/bash
 
-ExposePort=(30355 30855 30784)
+ExposePorts=($Ports)
 
 KubeIPs=$(kubectl get nodes -o wide | awk 'match($3,/(.*)worker(.*)/){print $6}')
 
 LBConfig="$LBConfig\nfrontend default-front"
 
-for Port in "${ExposePort[@]}"
+for Port in "${ExposePorts[@]}"
 do
     LBConfig="$LBConfig\n  bind *:$Port"
     LBConfig="$LBConfig\n  acl DestPort-$Port dst_port $Port"
@@ -15,7 +15,7 @@ done
 
 LBConfig="$LBConfig\n"
 
-for Port in "${ExposePort[@]}"
+for Port in "${ExposePorts[@]}"
 do
     ServerNum=0
     LoadBalancer=''

@@ -1,6 +1,8 @@
 FROM alpine:latest
 
-EXPOSE 8201
+EXPOSE 8201:30355
+
+ENV Ports="30355 30855 30784"
 
 RUN apk add haproxy mc curl bash --no-cache
 
