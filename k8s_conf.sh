@@ -8,7 +8,7 @@ LBConfig="$LBConfig\nfrontend default-front"
 
 for Port in "${ExposePorts[@]}"
 do
-    LBConfig="$LBConfig\n  bind *:$Port"
+    LBConfig="$LBConfig\n  bind 0.0.0.0:$Port"
     LBConfig="$LBConfig\n  acl DestPort-$Port dst_port $Port"
     LBConfig="$LBConfig\n  use_backend backend-$Port if DestPort-$Port"
 done
