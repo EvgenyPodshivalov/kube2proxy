@@ -1,6 +1,7 @@
 FROM alpine:latest
 
 ARG Ports
+ARG KubeConfig
 
 RUN apk add haproxy mc curl bash --no-cache
 
@@ -9,7 +10,7 @@ RUN curl -L -o /usr/bin/kubectl https://storage.googleapis.com/kubernetes-releas
 
 COPY haproxy.cfg.config /etc/haproxy/haproxy.cfg.config
 COPY k8s_conf.sh /home/k8s_conf.sh
-COPY config /root/.kube/config
+COPY $KubeConfig /root/.kube/config
 
 RUN /home/k8s_conf.sh
 
