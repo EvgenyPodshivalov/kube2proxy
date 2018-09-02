@@ -1,11 +1,9 @@
 FROM alpine:latest
 
 ARG KubeConfigPath
-
 ENV ScriptPath='/home/k8s_conf.sh'
 
 RUN apk add haproxy curl bash gawk keepalived --no-cache
-
 RUN curl -L -o /usr/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && \
     chmod +x /usr/bin/kubectl
 
