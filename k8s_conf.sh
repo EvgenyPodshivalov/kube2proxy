@@ -1,8 +1,8 @@
 #!/bin/bash
 
-if [ -z $Ports ]
+if [[ -z $Ports ]]
 then
-    ExposePorts=$(kubectl describe svc --all-namespaces | awk '{if($1 == "NodePort:"){ print $3 }}' | awk 'match ($1,/(.*)\/(.*)/,m){print m[1]}')
+    ExposePorts=($(kubectl describe svc --all-namespaces | awk '{if($1 == "NodePort:"){ print $3 }}' | awk 'match ($1,/(.*)\/(.*)/,m){print m[1]}'))
 else
     ExposePorts=($Ports)
 fi
