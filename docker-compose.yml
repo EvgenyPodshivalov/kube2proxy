@@ -5,6 +5,8 @@ services:
        context: .
        args:
          #Ports to expose. Default Exposes all ports
+         #Ports: "30355 30855 30784"
+         KubeConfigPath: "config"
      ports:
        - "8201:30355"
        - "8202:30855"
