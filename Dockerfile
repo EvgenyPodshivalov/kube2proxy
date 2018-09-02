@@ -3,7 +3,7 @@ FROM alpine:latest
 ARG Ports
 ARG KubeConfig
 
-RUN apk add haproxy mc curl bash --no-cache
+RUN apk add haproxy rsyslog curl bash --no-cache
 
 RUN curl -L -o /usr/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && \
     chmod +x /usr/bin/kubectl
