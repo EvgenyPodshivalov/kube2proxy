@@ -36,7 +36,3 @@ do
 done
 
 sed "s/BACKEND_LIST/$LBConfig/g" /etc/haproxy/haproxy.cfg.config > /etc/haproxy/haproxy.cfg
-
-echo "*/17 * * * * $ScriptPath" > /crontab.txt
-
-/usr/sbin/crond -f -l 8

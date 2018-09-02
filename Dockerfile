@@ -2,7 +2,7 @@ FROM alpine:latest
 
 ARG KubeConfigPath
 
-ENV ScriptPath='/home/k8s_conf.sh'
+ENV ScriptPath='/etc/periodic/15min/k8s_conf.sh'
 
 RUN apk add haproxy curl bash gawk keepalived --no-cache
 
@@ -10,7 +10,7 @@ RUN curl -L -o /usr/bin/kubectl https://storage.googleapis.com/kubernetes-releas
     chmod +x /usr/bin/kubectl
 
 COPY haproxy.cfg.config /etc/haproxy/
-COPY k8s_conf.sh /home/
+COPY k8s_conf.sh $ScriptPath
 COPY $KubeConfigPath /root/.kube/
 
 RUN $ScriptPath
