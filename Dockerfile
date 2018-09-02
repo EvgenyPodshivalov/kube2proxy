@@ -2,7 +2,7 @@ FROM alpine:latest
 
 ARG KubeConfigPath
 
-ENV ScriptPath='/etc/periodic/15min/k8s_conf.sh'
+ENV ScriptPath='/home/k8s_conf.sh'
 
 RUN apk add haproxy curl bash gawk keepalived --no-cache
 
@@ -14,6 +14,7 @@ COPY k8s_conf.sh $ScriptPath
 COPY $KubeConfigPath /root/.kube/
 
 RUN $ScriptPath
+RUN ln -s $ScriptPath /etc/periodic/15min/
 
 STOPSIGNAL SIGUSR1
 
