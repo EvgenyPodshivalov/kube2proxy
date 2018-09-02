@@ -1,6 +1,11 @@
 #!/bin/bash
 
-ExposePorts=($Ports)
+if [ -z $Ports ]
+then
+    ExposePorts=$(kubectl describe svc --all-namespaces | awk '{if($1 == "NodePort:"){ print $3 }}' | awk 'match ($1,/(.*)\/(.*)/,m){print m[1]}')
+else
+    ExposePorts=($Ports)
+fi
 
 KubeIPs=$(kubectl get nodes -o wide | awk 'match($3,/(.*)worker(.*)/){print $6}')
 
