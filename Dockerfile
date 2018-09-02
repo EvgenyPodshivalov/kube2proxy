@@ -1,15 +1,15 @@
 FROM alpine:latest
 
-ARG KubeConfig
+ARG KubeConfigPath
 
-RUN apk add haproxy curl bash gawk --no-cache
+RUN apk add haproxy curl bash gawk keepalived --no-cache
 
 RUN curl -L -o /usr/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && \
     chmod +x /usr/bin/kubectl
 
 COPY haproxy.cfg.config /etc/haproxy/
 COPY k8s_conf.sh /home/
-COPY $KubeConfig /root/.kube/
+COPY $KubeConfigPath /root/.kube/
 
 RUN /home/k8s_conf.sh
 
