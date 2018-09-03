@@ -1,5 +1,5 @@
 # kube2proxy
-Kubernetes HAProxy
+External proxy for Kubernetes Ingress with HAProxy
 
 Configuration
 1. Check for config file kubernetes cluster
