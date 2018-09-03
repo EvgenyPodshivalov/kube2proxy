@@ -9,6 +9,6 @@ services:
         KubeConfigPath: "config"
     restart: on-failure
     ports:
-      - "8201:30355"
+      - "8201:80"
       - "8202:30855"
-      - "8203:30784"
+      - "10051:30051"

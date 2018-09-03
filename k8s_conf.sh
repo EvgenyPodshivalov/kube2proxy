@@ -3,6 +3,7 @@
 if [[ -z $Ports ]]
 then
     ExposePorts=($(kubectl describe svc --all-namespaces | awk '{if($1 == "NodePort:"){ print $3 }}' | awk 'match ($1,/(.*)\/(.*)/,m){print m[1]}'))
+    ExposePorts=("80" "443" "${ExposePorts[@]}")
 else
     ExposePorts=($Ports)
 fi
