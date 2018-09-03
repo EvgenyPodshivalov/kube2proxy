@@ -1,5 +1,5 @@
 # kube2proxy
-External proxy for Kubernetes Ingress with HAProxy
+External L4 proxy for Kubernetes Ingress with HAProxy
 
 With Layer 4 proxy you can expose externalIP to you k8s cluster
 
